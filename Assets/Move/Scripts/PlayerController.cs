@@ -8,6 +8,11 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 1f;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {
