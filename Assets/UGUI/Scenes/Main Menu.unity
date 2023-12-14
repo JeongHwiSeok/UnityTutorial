@@ -1010,6 +1010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
   speed: 5
+  playerCamera: {fileID: 1559083986}
 --- !u!1 &815810771
 GameObject:
   m_ObjectHideFlags: 0
