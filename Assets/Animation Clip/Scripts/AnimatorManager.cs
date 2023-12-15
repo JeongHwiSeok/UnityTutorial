@@ -24,6 +24,7 @@ public class AnimatorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ÇöÀç
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("Close"))
         {
             // animator.GetCurrentAnimatorStateInfo(0).normalizedTime
