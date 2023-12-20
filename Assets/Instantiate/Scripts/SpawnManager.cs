@@ -49,7 +49,8 @@ public class SpawnManager : MonoBehaviour
         while(true)
         {
             // Random.Range(0, n) : 0 ~ n-1 까지의 값을 반환
-            factory.CreateUnit(listUnits[Random.Range(0, listUnits.Count)]);
+            GameObject gameObject = factory.CreateUnit(listUnits[Random.Range(0, listUnits.Count)]);
+            gameObject.transform.position = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
 
             // new WaitForSeconds() : 특정한 시간동안 코루틴을 대기
             yield return new WaitForSeconds(5f);
