@@ -20,11 +20,28 @@ public class Mouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Launch();
+    }
 
+    public void Shooter()
+    {
+
+    }
+
+    public void Launch()
+    {
+        if(Input.GetButtonDown("Fire1"))
+        {
+            SetCursor(CURSOR.ATTACK);
+        }
+        else if(Input.GetButtonUp("Fire1"))
+        {
+            SetCursor(CURSOR.HOLD);
+        }
     }
 
     public void SetCursor(CURSOR cursorImage)
     {
-        Cursor.SetCursor(mouseCursor[(int)cursorImage], Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(mouseCursor[(int)cursorImage], Vector2.zero, CursorMode.ForceSoftware);
     }
 }

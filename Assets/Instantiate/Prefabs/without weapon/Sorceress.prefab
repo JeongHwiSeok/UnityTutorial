@@ -20617,7 +20617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   targetDirection: {x: 0, y: 0, z: 0}
-  state: 1
+  state: 0
   animator: {fileID: 0}
   speed: 5
 --- !u!136 &8741295487916734655

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Wizard : Unit
 {
-    public override void Move()
+    public void Start()
     {
-        Debug.Log("Wizard Move");
+        health = 100;
+        Debug.Log(health);
     }
 }

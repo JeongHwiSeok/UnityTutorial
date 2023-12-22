@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Sorceress : Unit
 {
-    public override void Move()
+    public void Start()
     {
-        Debug.Log("Sorceress Move");
+        health = 150;
+        Debug.Log(health);
     }
 }
