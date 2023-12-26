@@ -7,8 +7,10 @@ public enum State
 {
     Move,
     Attack,
-    Die
+    Die,
+    None
 }
+
 
 public abstract class Unit : MonoBehaviour
 {
@@ -21,7 +23,9 @@ public abstract class Unit : MonoBehaviour
 
     [SerializeField] float speed = 5f;
 
-    protected float health;
+    [SerializeField] protected float health;
+
+    [SerializeField] Sound sound = new Sound();
 
     public void OnHit(float damage)
     {
@@ -55,6 +59,8 @@ public abstract class Unit : MonoBehaviour
                 break;
             case State.Die: Die();
                 break;
+            case State.None: Destroy(gameObject);
+                break;
         }
     }
 
@@ -81,12 +87,20 @@ public abstract class Unit : MonoBehaviour
 
     public virtual void Attack()
     {
-        animator.SetBool("Attack", true);
+        animator.SetBool("Attack", true);   
+    }
+
+    public void AttackSound()
+    {
+        SoundManager.instance.Sound(sound.audioClips[0]);
     }
 
     public virtual void Die()
     {
         animator.Play("Die");
+        SoundManager.instance.Sound(sound.audioClips[1]);
+
+        state = State.None;
     }
 
     // OnTriggerEnter() : Trigger 충돌이 되었을 때 이벤트를 호출하는 함수
