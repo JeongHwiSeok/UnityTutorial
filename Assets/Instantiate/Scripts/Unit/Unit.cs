@@ -11,40 +11,30 @@ public enum State
     None
 }
 
-
+[RequireComponent(typeof(HPBar))]
 public abstract class Unit : MonoBehaviour
 {
     [SerializeField] GameObject target;
-    [SerializeField] Vector3 targetDirection;
 
     [SerializeField] State state;
-
+    
+    [SerializeField] Vector3 targetDirection;
     [SerializeField] Animator animator;
 
     [SerializeField] float speed = 5f;
 
     [SerializeField] protected float health;
+    [SerializeField] protected float maxHealth;
+
+    [SerializeField] HPBar healthBar;
 
     [SerializeField] Sound sound = new Sound();
-
-    public void OnHit(float damage)
-    {
-        health -= damage;
-
-        if(health <= 0)
-        {
-            state = State.Die;
-        }
-    }
-
-    public virtual void Release()
-    {
-        Destroy(gameObject);
-    }
 
     private void Awake()
     {
         target = GameObject.Find("Player");
+
+        healthBar = GetComponent<HPBar>();
         animator = GetComponent<Animator>();
         state = State.Move;
     }
@@ -62,6 +52,24 @@ public abstract class Unit : MonoBehaviour
             case State.None: Destroy(gameObject);
                 break;
         }
+    }
+
+    public void OnHit(float damage)
+    {
+        if (health <= 0) return;
+
+        health -= damage;
+        healthBar.UpdateHP(health, maxHealth);
+
+        if (health <= 0)
+        {
+            state = State.Die;
+        }
+    }
+
+    public virtual void Release()
+    {
+        Destroy(gameObject);
     }
 
     public virtual void Move()
@@ -98,9 +106,13 @@ public abstract class Unit : MonoBehaviour
     public virtual void Die()
     {
         animator.Play("Die");
-        SoundManager.instance.Sound(sound.audioClips[1]);
 
         state = State.None;
+    }
+
+    public void DieSound()
+    {
+        SoundManager.instance.Sound(sound.audioClips[1]);
     }
 
     // OnTriggerEnter() : Trigger 충돌이 되었을 때 이벤트를 호출하는 함수

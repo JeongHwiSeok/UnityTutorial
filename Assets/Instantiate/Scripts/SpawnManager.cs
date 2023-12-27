@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
 
     public Vector3 direction;
 
-    float timer = 0;
+    // float timer = 0;
 
     private void Start()
     {
