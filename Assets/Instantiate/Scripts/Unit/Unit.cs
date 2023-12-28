@@ -49,7 +49,7 @@ public abstract class Unit : MonoBehaviour
                 break;
             case State.Die: Die();
                 break;
-            case State.None: Destroy(gameObject);
+            case State.None: 
                 break;
         }
     }
@@ -101,18 +101,15 @@ public abstract class Unit : MonoBehaviour
     public void AttackSound()
     {
         SoundManager.instance.Sound(sound.audioClips[0]);
+        Debug.Log(sound.audioClips[0]);
     }
 
     public virtual void Die()
     {
         animator.Play("Die");
+        SoundManager.instance.Sound(sound.audioClips[1]);
 
         state = State.None;
-    }
-
-    public void DieSound()
-    {
-        SoundManager.instance.Sound(sound.audioClips[1]);
     }
 
     // OnTriggerEnter() : Trigger 충돌이 되었을 때 이벤트를 호출하는 함수
