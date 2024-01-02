@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/UGUI/Scenes/Main Menu.unity
+    path: Assets/last/UGUI/Scenes/Main Menu.unity
     guid: ff6de085ba4af704784b4997ce04443b
   - enabled: 1
-    path: Assets/Terrain/Scenes/Terrain.unity
+    path: Assets/last/Terrain/Scenes/Terrain.unity
     guid: 07ac74fb2c883eb41983f0e67c794161
   m_configObjects: {}

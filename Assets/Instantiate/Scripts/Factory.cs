@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class Factory : MonoBehaviour
 {
+    public static Factory instance;
+
     [SerializeField] Transform spawnPosition;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
 
     public GameObject CreateUnit(Unit unit)
     {

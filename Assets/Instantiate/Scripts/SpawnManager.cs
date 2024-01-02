@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
-{
-    [SerializeField] List<Unit> listUnits;
-
-    [SerializeField] Factory factory;
-
+{ 
     public Vector3 direction;
 
     // float timer = 0;
@@ -36,31 +32,15 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(CreateRoutine());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(LogRoutine());
-        }
-    }
-
     public IEnumerator CreateRoutine()
     {
         while(true)
         {
             // Random.Range(0, n) : 0 ~ n-1 까지의 값을 반환
-            GameObject gameObject = factory.CreateUnit(listUnits[Random.Range(0, listUnits.Count)]);
-            gameObject.transform.position = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+            ObjectPool.instance.GetObject(0).SetActive(true);
 
             // new WaitForSeconds() : 특정한 시간동안 코루틴을 대기
             yield return new WaitForSeconds(5f);
         }
-    }
-
-    public IEnumerator LogRoutine()
-    {
-        yield return new WaitForSeconds(1f);
-
-        Debug.Log("Attack");
     }
 }

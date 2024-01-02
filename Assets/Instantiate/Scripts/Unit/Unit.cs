@@ -69,7 +69,7 @@ public abstract class Unit : MonoBehaviour
 
     public virtual void Release()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public virtual void Move()
@@ -101,7 +101,6 @@ public abstract class Unit : MonoBehaviour
     public void AttackSound()
     {
         SoundManager.instance.Sound(sound.audioClips[0]);
-        Debug.Log(sound.audioClips[0]);
     }
 
     public virtual void Die()
