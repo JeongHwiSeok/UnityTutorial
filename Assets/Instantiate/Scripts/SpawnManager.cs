@@ -37,10 +37,12 @@ public class SpawnManager : MonoBehaviour
         while(true)
         {
             // Random.Range(0, n) : 0 ~ n-1 까지의 값을 반환
-            ObjectPool.instance.GetObject(0).SetActive(true);
+            GameObject gameObject = ObjectPool.instance.GetObject(0);
+            
+            gameObject.SetActive(true);
 
             // new WaitForSeconds() : 특정한 시간동안 코루틴을 대기
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(30f);
         }
     }
 }

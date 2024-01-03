@@ -48,9 +48,20 @@ public class ObjectPool : MonoBehaviour
 
             obj.SetActive(false);
 
-            unitList.Add(obj);
+            if(k >= unitList.Count)
+            {
+                unitList.Capacity *= 2;
 
-            return obj;
+                unitList.Add(obj);
+
+                return obj;
+            }
+            else
+            {
+                unitList.Add(obj);
+
+                return obj;
+            }
         }
         else if(unitList[k].activeSelf == false)
         {
@@ -73,5 +84,10 @@ public class ObjectPool : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void InsertObject(GameObject prefab)
+    {
+        prefab.SetActive(false);
     }
 }

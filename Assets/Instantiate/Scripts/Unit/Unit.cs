@@ -21,6 +21,8 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] Vector3 targetDirection;
     [SerializeField] Animator animator;
 
+    [SerializeField] Vector3 originDirection;
+
     [SerializeField] float speed = 5f;
 
     [SerializeField] protected float health;
@@ -36,7 +38,12 @@ public abstract class Unit : MonoBehaviour
 
         healthBar = GetComponent<HPBar>();
         animator = GetComponent<Animator>();
+    }
+
+    protected virtual void OnEnable()
+    {
         state = State.Move;
+        originDirection = transform.position;
     }
 
     protected virtual void Update()
@@ -47,11 +54,8 @@ public abstract class Unit : MonoBehaviour
                 break;
             case State.Attack: Attack();
                 break;
-            case State.Die: Die();
-                break;
-            case State.None: 
-                break;
         }
+        healthBar.UpdateHP(health, maxHealth);
     }
 
     public void OnHit(float damage)
@@ -59,17 +63,17 @@ public abstract class Unit : MonoBehaviour
         if (health <= 0) return;
 
         health -= damage;
-        healthBar.UpdateHP(health, maxHealth);
 
         if (health <= 0)
         {
-            state = State.Die;
+            Die();
         }
     }
 
     public virtual void Release()
     {
-        gameObject.SetActive(false);
+        // Destroy(gameObject);
+        ObjectPool.instance.InsertObject(gameObject);
     }
 
     public virtual void Move()
@@ -106,6 +110,7 @@ public abstract class Unit : MonoBehaviour
     public virtual void Die()
     {
         animator.Play("Die");
+        Debug.Log("»ç¸Á¸ð¼Ç");
         SoundManager.instance.Sound(sound.audioClips[1]);
 
         state = State.None;
@@ -127,5 +132,11 @@ public abstract class Unit : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         state = State.Move;
+    }
+
+    private void OnDisable()
+    {
+        transform.position = originDirection;
+        health = maxHealth;
     }
 }
